@@ -15,6 +15,8 @@ from torch.optim import Adam
 import torch.optim.lr_scheduler as lr_scheduler
 import torch.nn.functional as F
 
+from torch.nn.utils import prune
+
 try:
     from apex import amp
     APEX_AVAILABLE = True
@@ -101,9 +103,8 @@ class BaseModel:
                                                             patience=self.Config.LR_SCHEDULE_PATIENCE)
 
         if self.Config.LOAD_WEIGHTS:
-            exp_utils.print_verbose(self.Config.VERBOSE, "Loading weights ... ({})".format(join(self.Config.EXP_PATH,
-                                                                                        self.Config.WEIGHTS_PATH)))
-            self.load_model(join(self.Config.EXP_PATH, self.Config.WEIGHTS_PATH))
+            exp_utils.print_verbose(self.Config.VERBOSE, "Loading weights ... ({})".format(self.Config.WEIGHTS_PATH))
+            self.load_model(self.Config.WEIGHTS_PATH)
 
         # Reset weights of last layer for transfer learning
         # if self.Config.RESET_LAST_LAYER:
@@ -112,8 +113,8 @@ class BaseModel:
 
 
     def train(self, X, y, weight_factor=None):
-        X = X.contiguous().cuda(non_blocking=True)  # (bs, features, x, y)
-        y = y.contiguous().cuda(non_blocking=True)  # (bs, classes, x, y)
+        X = torch.nan_to_num(X).contiguous().to(device=self.device, non_blocking=True)  # (bs, features, x, y)
+        y = torch.nan_to_num(y).contiguous().to(device=self.device, non_blocking=True)  # (bs, classes, x, y)
 
         self.net.train()
         self.optimizer.zero_grad()
@@ -123,10 +124,10 @@ class BaseModel:
         if weight_factor is not None:
             if len(y.shape) == 4:  # 2D
                 weights = torch.ones((self.Config.BATCH_SIZE, self.Config.NR_OF_CLASSES,
-                                      y.shape[2], y.shape[3])).cuda()
+                                      y.shape[2], y.shape[3])).to(device=self.device)
             else:  # 3D
                 weights = torch.ones((self.Config.BATCH_SIZE, self.Config.NR_OF_CLASSES,
-                                      y.shape[2], y.shape[3], y.shape[4])).cuda()
+                                      y.shape[2], y.shape[3], y.shape[4])).to(device=self.device)
             bundle_mask = y > 0
             weights[bundle_mask.data] *= weight_factor  # 10
 
@@ -174,8 +175,8 @@ class BaseModel:
 
     def test(self, X, y, weight_factor=None):
         with torch.no_grad():
-            X = X.contiguous().cuda(non_blocking=True)
-            y = y.contiguous().cuda(non_blocking=True)
+            X = torch.nan_to_num(X).contiguous().to(device=self.device, non_blocking=True)
+            y = torch.nan_to_num(y).contiguous().to(device=self.device, non_blocking=True)
 
         if self.Config.DROPOUT_SAMPLING:
             self.net.train()
@@ -187,10 +188,10 @@ class BaseModel:
         if weight_factor is not None:
             if len(y.shape) == 4:  # 2D
                 weights = torch.ones((self.Config.BATCH_SIZE, self.Config.NR_OF_CLASSES,
-                                      y.shape[2], y.shape[3])).cuda()
+                                      y.shape[2], y.shape[3])).to(device=self.device)
             else:  # 3D
                 weights = torch.ones((self.Config.BATCH_SIZE, self.Config.NR_OF_CLASSES,
-                                      y.shape[2], y.shape[3], y.shape[4])).cuda()
+                                      y.shape[2], y.shape[3], y.shape[4])).to(device=self.device)
             bundle_mask = y > 0
             weights[bundle_mask.data] *= weight_factor
             if self.Config.EXPERIMENT_TYPE == "peak_regression":

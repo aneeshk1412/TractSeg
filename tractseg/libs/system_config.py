@@ -83,7 +83,7 @@ class SystemConfig:
     if "network_dir" in paths:
         NETWORK_DRIVE = paths["network_dir"]
     else:
-        NETWORK_DRIVE = None
+        NETWORK_DRIVE = ""
 
     if os.environ.get("TRACTSEG_WEIGHTS_DIR") is not None:
         WEIGHTS_DIR = os.environ.get("TRACTSEG_WEIGHTS_DIR")

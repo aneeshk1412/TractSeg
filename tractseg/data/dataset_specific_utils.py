@@ -160,6 +160,19 @@ def get_bundle_names(CLASSES):
         # Only use subset of classes for unit testing because of runtime
         bundles = ["CST_right"]
 
+    elif CLASSES == "camcan_all_classes":
+        # Uses all classes available in camcan dataset (61 tracts)
+        bundles = ['forcepsMinor', 'forcepsMajor', 'parietalCC', 'middleFrontalCC', 'anterioFrontalCC', 'leftcingulum',
+                   'rightcingulum', 'leftUncinate', 'rightUncinate', 'leftIFOF', 'rightIFOF', 'leftArc', 'rightArc',
+                   'leftSLF1And2', 'rightSLF1And2', 'leftSLF3', 'rightSLF3', 'leftfrontoThalamic', 'rightfrontoThalamic',
+                   'lefttemporoThalamic', 'righttemporoThalamic', 'leftparietoThalamic', 'rightparietoThalamic', 'leftmotorThalamic',
+                   'rightmotorThalamic', 'leftspinoThalamic', 'rightspinoThalamic', 'leftAslant', 'rightAslant', 'leftILF', 'rightILF',
+                   'leftMDLFang', 'rightMDLFang', 'leftMDLFspl', 'rightMDLFspl', 'leftpArc', 'rightpArc', 'leftTPC', 'rightTPC',
+                   'leftmeyer', 'rightmeyer', 'leftbaum', 'rightbaum', 'leftMotorCerebellar', 'rightMotorCerebellar', 'leftAnterioFrontoCerebellar',
+                   'rightAnterioFrontoCerebellar', 'leftThalamicoCerebellar', 'rightThalamicoCerebellar', 'leftOccipitoCerebellar', 'rightOccipitoCerebellar',
+                   'leftParietoCerebellar', 'rightParietoCerebellar', 'leftContraMotorCerebellar', 'rightContraMotorCerebellar', 'leftContraAnterioFrontoCerebellar',
+                   'rightContraAnterioFrontoCerebellar', 'leftVOF', 'rightVOF', 'leftCST', 'rightCST']
+
     else:
         #1 tract
         bundles = [CLASSES]
@@ -393,6 +406,8 @@ def get_cv_fold(fold, dataset="HCP"):
         elif dataset.startswith("Schizo"):
             # ~410 subjects
             subjects = list(utils.chunks(subjects, 82))  # 5 folds a 82 subjects
+        elif dataset.startswith("camcan"):
+            subjects = list(utils.chunks(subjects, 3)) # 15 datapoints = 5 fold * 3 points per fold
         else:
             raise ValueError("Invalid dataset name")
 
@@ -502,6 +517,8 @@ def scale_input_to_original_shape(img4d, dataset, resolution="1.25mm"):
             img4d = img_utils.pad_4d_image_left(img4d, np.array([1, 15, 1, 0]),
                                                 [145, 174, 145, img4d.shape[3]], pad_value=0)  # (145, 174, 145, none)
             return img_utils.resize_first_three_dims(img4d, zoom=0.62)  # (91,109,91)
+        else:
+            return img4d
 
     elif resolution == "2mm":
         if dataset == "HCP":  # (80,80,80)
@@ -515,6 +532,8 @@ def scale_input_to_original_shape(img4d, dataset, resolution="1.25mm"):
                                                [90, 108, 90, img4d.shape[3]], pad_value=0)  # (90, 108, 90, none)
         elif dataset == "TRACED":  # (78,93,75)
             raise ValueError("resolution '2mm' not supported for dataset 'TRACED'")
+        else:
+            return img4d
 
     elif resolution == "2.5mm":
         if dataset == "HCP":  # (80,80,80)
@@ -533,6 +552,8 @@ def scale_input_to_original_shape(img4d, dataset, resolution="1.25mm"):
             img4d = img_utils.pad_4d_image_left(img4d, np.array([0, 7, 0, 0]),
                                                 [80, 93, 80, img4d.shape[3]], pad_value=0)  # (80,93,80,none)
             return img4d[1:79, :, 3:78, :]  # (78,93,75,none)
+        else:
+            return img4d
 
 
 def get_optimal_orientation_for_bundle(bundle):

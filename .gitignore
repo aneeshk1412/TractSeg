@@ -1,3 +1,4 @@
+.venv
 .idea
 .vscode
 *.pyc
@@ -28,3 +29,7 @@ tractseg/experiments/TractSeg/*
 tractseg/experiments/Peaks/*
 tractseg/experiments/Schizo/*
 tractseg/experiments/UNet3D_and_TOMxyz/*
+
+batchgenerators/
+dataset/
+hcp_exp_nodes/

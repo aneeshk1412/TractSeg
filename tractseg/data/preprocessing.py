@@ -21,9 +21,9 @@ from tractseg.libs import exp_utils
 
 
 #todo: adapt
-dataset = "HCP_final"
-DATASET_FOLDER = "HCP_for_training_COPY"  # source folder
-DATASET_FOLDER_PREPROC = "HCP_preproc"  # target folder
+dataset = "camcan"
+DATASET_FOLDER = "/Users/aneeshks/Documents/projects/TractSeg/dataset/camcan"  # source folder
+DATASET_FOLDER_PREPROC = "/Users/aneeshks/Documents/projects/TractSeg/dataset/camcan_preprocessed"  # target folder
 
 # dataset = "HCP_all"
 # DATASET_FOLDER = "data/HCP_all_training"

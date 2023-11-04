@@ -249,7 +249,7 @@ def create_exp_plot(metrics, path, exp_name, without_first_epochs=False,
     # does not properly work with ax.twinx()
     # fig.gca().set_position((.1, .3, .8, .6))  # [left, bottom, width, height]; between 0-1: where it should be in result
 
-    plt.grid(b=True, which='major', color='black', linestyle='-')
+    plt.grid(visible=True, which='major', color='black', linestyle='-')
     plt.xlabel('Epoch')
     plt.ylabel('Loss')
 

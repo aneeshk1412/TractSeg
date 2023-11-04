@@ -1,5 +1,5 @@
 import os
-import time 
+import time
 
 import requests
 import numpy as np
@@ -164,7 +164,7 @@ def download_pretrained_weights(experiment_type, dropout_sampling=False,
             os.makedirs(C.WEIGHTS_DIR)
         download_url(WEIGHTS_URL, weights_path)
         print(f"  downloaded in {time.time()-st:.2f}s")
-        
+
 
 class bcolors:
     HEADER = '\033[95m'

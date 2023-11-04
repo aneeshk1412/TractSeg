@@ -100,6 +100,9 @@ subjects_90g_incomplete = ["601127", "620434", "644044", "715041", "749361", "75
                            "951457", "979984", "814649"]
 all_subjects_FINAL_with_complete_90g = [s for s in all_subjects_FINAL if s not in subjects_90g_incomplete]
 
+all_subjects_camcan = ["CC121795", "CC210250", "CC221565", "CC310414", "CC320359", "CC320870", "CC320904", "CC321107", "CC321899", "CC410119", "CC420433", "CC510015", "CC610631", "CC610671", "CC721434"]
+
+
 def get_all_subjects(dataset="HCP"):
     if dataset == "HCP" or dataset == "HCP_final" or dataset == "HCP_32g":
         return all_subjects_FINAL
@@ -113,5 +116,7 @@ def get_all_subjects(dataset="HCP"):
         return all_subjects_biobank_20k()
     elif dataset.startswith("biobank_10"):
         return all_subjects_biobank_10 * 10
+    elif dataset == "camcan":
+        return all_subjects_camcan
     else:
         raise ValueError("Invalid dataset name")
