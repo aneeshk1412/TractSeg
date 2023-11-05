@@ -368,6 +368,8 @@ def get_dwi_affine(dataset, resolution):
                          [0.,  2.5,  0.,  -126.],
                          [0.,  0.,  2.5,  -72.],
                          [0.,  0.,  0.,    1.]])
+    elif (dataset == "camcan"):
+        return np.eye(4)
 
     else:
         raise ValueError("No Affine defined for this dataset and resolution")

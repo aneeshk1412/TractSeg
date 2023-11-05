@@ -14,5 +14,8 @@ class Config(TractSegConfig):
     DATASET = 'camcan'
     CLASSES = 'camcan_all_classes'
     NR_OF_CLASSES = 61
-    NUM_EPOCHS = 50
-    PRINT_FREQ = 1
+    NUM_EPOCHS = 100
+    LOSS_FUNCTION = 'soft_sample_dice'
+    BATCH_SIZE = 8
+    ONLY_VAL = True
+    SPATIAL_TRANSFORM = 'SpatialTransformPeaks'
