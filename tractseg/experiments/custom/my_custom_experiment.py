@@ -14,8 +14,27 @@ class Config(TractSegConfig):
     DATASET = 'camcan'
     CLASSES = 'camcan_all_classes'
     NR_OF_CLASSES = 61
-    NUM_EPOCHS = 100
+
+    SPATIAL_TRANSFORM = 'SpatialTransformPeaks'
+
+    TRAIN = True
+    NUM_EPOCHS = 250
+    LEARNING_RATE = 0.001
+    LR_SCHEDULE = True
+    LR_SCHEDULE_MODE = "min"  # min | max
+    LR_SCHEDULE_PATIENCE = 20
+    OPTIMIZER = 'Adamax'
     LOSS_FUNCTION = 'soft_sample_dice'
     BATCH_SIZE = 8
-    ONLY_VAL = True
-    SPATIAL_TRANSFORM = 'SpatialTransformPeaks'
+    BATCH_NORM = False
+    WEIGHT_DECAY = 0
+    USE_DROPOUT = False
+    DROPOUT_SAMPLING = False
+
+    LOAD_WEIGHTS = False
+    # WEIGHTS_PATH = join(C.EXP_PATH, "My_experiment/best_weights_ep64.npz")
+    WEIGHTS_PATH = ""  # if empty string: autoloading the best_weights in get_best_weights_path()
+
+    CV_FOLD = 0
+
+    TEST = True
