@@ -119,3 +119,8 @@ class Config:
     KEEP_INTERMEDIATE_FILES = False
     CSD_RESOLUTION = "LOW"  # HIGH | LOW
     NR_CPUS = -1
+
+    # Sparsity Related
+    PRUNE = False
+    REMOVE_FRACTION = 0.2
+    METHOD = "global_unstructured" # global_unstructured

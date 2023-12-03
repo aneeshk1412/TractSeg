@@ -8,6 +8,7 @@ import glob
 from os.path import join
 import importlib
 import numpy as np
+import matplotlib.pyplot as plt
 import torch
 import torch.nn as nn
 from torch.optim import Adamax
@@ -75,6 +76,58 @@ class BaseModel:
         # nr_gpus = torch.cuda.device_count()
         # exp_utils.print_and_save(self.Config.EXP_PATH, "nr of gpus: {}".format(nr_gpus))
         # self.net = nn.DataParallel(self.net)
+
+        ## Print model and number of parameters
+        print(f"{self.net}")
+
+        total_params = sum(p.numel() for p in self.net.parameters())
+        print(f"Number of parameters: {total_params}")
+
+        ## Count number of parameters less than threshold
+        threshold = 0.01
+        params_less_than_threshold = sum(torch.count_nonzero(torch.abs(p) < threshold) for p in self.net.parameters())
+        print(f"Percent parameters less than {threshold}: {params_less_than_threshold / total_params * 100}%")
+
+        params_list = [abs(float(x)) for p in self.net.parameters() for x in p.detach().numpy().reshape(-1)]
+        counts, bins = np.histogram(params_list, bins=100)
+        plt.stairs(counts, bins)
+        plt.savefig(f"{Config.EXP_NAME}_weights_histogram.png")
+
+        def flatten_model(model):
+            submodules = list(model.children())
+            if len(submodules) == 0 and hasattr(model, 'weight'):
+                return [model]
+            else:
+                res = []
+                for module in submodules:
+                    res += flatten_model(module)
+                return res
+
+        def print_sparsity(layers):
+            for module in layers:
+                sparsity = 100. * float(torch.sum(module.weight == 0)) / float(module.weight.nelement())
+                print(module)
+                print(f"{sparsity}")
+                print()
+            net_sparsity = 100. * float(sum(torch.sum(module.weight == 0) for module in layers)) / float(sum(module.weight.nelement() for module in layers))
+            print(f"{net_sparsity = }")
+
+        if self.Config.PRUNE:
+            if self.Config.METHOD == "global_unstructured":
+                layers = flatten_model(self.net)
+                print("Before: ")
+                print_sparsity(layers)
+                print()
+
+                parameters_to_prune = tuple((module, "weight") for module in layers)
+                prune.global_unstructured(
+                    parameters_to_prune, pruning_method=prune.L1Unstructured, amount=self.Config.REMOVE_FRACTION
+                )
+                for module in layers:
+                    prune.remove(module, "weight")
+
+                print("After")
+                print_sparsity(layers)
 
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         net = self.net.to(self.device)

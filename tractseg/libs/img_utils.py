@@ -609,7 +609,7 @@ def flip_affine(affine, flip_axis_list, data_shape):
     """
     apply flipping to affine
 
-    When flipping the data array, then we have to do the following to the 
+    When flipping the data array, then we have to do the following to the
     affine to undo the flipping of data array. (in the image viewer the
     image will look the same)
     """

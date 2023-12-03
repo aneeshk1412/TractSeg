@@ -9,18 +9,19 @@ import pickle
 import socket
 import datetime
 from collections import defaultdict
+import json
 
 import numpy as np
 from tqdm import tqdm
 from pprint import pprint
 import nibabel as nib
+from sklearn.metrics import f1_score
 
 from tractseg.libs import exp_utils
 from tractseg.libs import metric_utils
 from tractseg.libs import plot_utils
 from tractseg.data.data_loader_inference import DataLoaderInference
 from tractseg.data import dataset_specific_utils
-
 
 def _get_weights_for_this_epoch(Config, epoch_nr):
     if Config.LOSS_WEIGHT is None:
@@ -330,6 +331,7 @@ def test_whole_subject(Config, model, subjects, type):
     }
 
     metrics_bundles = defaultdict(lambda: [0])
+    dices = {}
 
     for subject in subjects:
         print("{} subject {}".format(type, subject))
@@ -355,6 +357,10 @@ def test_whole_subject(Config, model, subjects, type):
         else:
             img_probs = np.reshape(img_probs, (-1, img_probs.shape[-1]))  # Flatten all dims except nr_classes dim
             img_y = np.reshape(img_y, (-1, img_y.shape[-1]))
+
+            dice_scores = np.ndarray.tolist(f1_score((img_y > Config.THRESHOLD).astype(int), (img_probs > Config.THRESHOLD).astype(int), average=None))
+            dices[subject] = {k: v for (k, v) in zip(dataset_specific_utils.get_bundle_names(Config.CLASSES)[1:], dice_scores)}
+
             metrics = metric_utils.calculate_metrics(metrics, img_y, img_probs, 0,
                                                      type=type, threshold=Config.THRESHOLD)
             metrics_bundles = metric_utils.calculate_metrics_each_bundle(metrics_bundles, img_y, img_probs,
@@ -375,4 +381,8 @@ def test_whole_subject(Config, model, subjects, type):
         f.write("type: {}\n\n".format(type))
         pprint(metrics_bundles, f)
     pickle.dump(metrics, open(join(Config.EXP_PATH, "score_" + type + ".pkl"), "wb"))
+
+    with open(join('dice_scores_new_data_train_' + type + '.json'), 'w') as f:
+        json.dump(dices, f)
+
     return metrics

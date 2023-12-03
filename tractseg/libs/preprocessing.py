@@ -57,7 +57,7 @@ def move_to_MNI_space(input_file, bvals, bvecs, brain_mask, output_dir):
     os.system("flirt -ref " + template_path + " -in " + output_dir + "/FA.nii.gz -out " + output_dir +
               "/FA_MNI.nii.gz -applyisoxfm " + dwi_spacing + " -init " + output_dir +
               "/FA_2_MNI.mat -dof 6 -interp spline")
-              
+
     os.system("flirt -ref " + template_path + " -in " + input_file + " -out " + output_dir +
               "/Diffusion_MNI.nii.gz -applyisoxfm " + dwi_spacing + " -init " + output_dir +
               "/FA_2_MNI.mat -dof 6 -interp spline")
