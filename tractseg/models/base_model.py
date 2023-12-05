@@ -30,6 +30,29 @@ from tractseg.libs import exp_utils
 from tractseg.libs import metric_utils
 
 
+def boundary_dou(outputs, labels):
+    ## outputs: (bs, classes, x, y) [probabilities]
+    ## labels: (bs, classes, x, y) [true labels, one-hot encoded]
+
+    kernel = torch.Tensor([[0, 1, 0], [1, 1, 1], [0, 1, 0]], dtype=outputs.dtype, requires_grad=False).to(device=outputs.device)
+    kernel = kernel[None, None, :, :].repeat((outputs.shape[1], 1, 1, 1))
+
+    C = F.conv2d(labels, kernel, padding=1, groups=outputs.shape[1])
+    C = C * labels
+    C[C > 5] = 0
+
+    C = torch.count_nonzero(C, dim=(-1, -2))
+    S = torch.count_nonzero(labels, dim=(-1, -2))
+
+    smooth = 1e-5
+    alpha = 1 - 2.0 * (C + smooth) / (S + smooth)
+
+    intersect = torch.count_nonzero(outputs * labels, dim=(-1, -2))
+    union = torch.count_nonzero(outputs + labels, dim=(-1, -2))
+    loss = (union - intersect + smooth) / (union - alpha * intersect + smooth)
+    return loss.mean(dim=-1).sum()
+
+
 class BaseModel:
     def __init__(self, Config, inference=False):
         self.Config = Config
@@ -52,6 +75,8 @@ class BaseModel:
             self.criterion = pytorch_utils.soft_sample_dice
         elif self.Config.LOSS_FUNCTION == "soft_batch_dice":
             self.criterion = pytorch_utils.soft_batch_dice
+        elif self.Config.LOSS_FUNCTION == "boundary_dou":
+            self.criterion = boundary_dou
         elif self.Config.EXPERIMENT_TYPE == "peak_regression":
             if self.Config.LOSS_FUNCTION == "angle_length_loss":
                 self.criterion = pytorch_utils.angle_length_loss
@@ -76,6 +101,37 @@ class BaseModel:
         # nr_gpus = torch.cuda.device_count()
         # exp_utils.print_and_save(self.Config.EXP_PATH, "nr of gpus: {}".format(nr_gpus))
         # self.net = nn.DataParallel(self.net)
+
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        net = self.net.to(self.device)
+
+        if self.Config.OPTIMIZER == "Adamax":
+            self.optimizer = Adamax(net.parameters(), lr=self.Config.LEARNING_RATE,
+                                    weight_decay=self.Config.WEIGHT_DECAY)
+        elif self.Config.OPTIMIZER == "Adam":
+            self.optimizer = Adam(net.parameters(), lr=self.Config.LEARNING_RATE,
+                                  weight_decay=self.Config.WEIGHT_DECAY)
+        else:
+            raise ValueError("Optimizer not defined")
+
+        if APEX_AVAILABLE and self.Config.FP16:
+            # Use O0 to disable fp16 (might be a little faster on TitanX)
+            self.net, self.optimizer = amp.initialize(self.net, self.optimizer, verbosity=0, opt_level="O1")
+            if not inference:
+                print("INFO: Using fp16 training")
+        else:
+            if not inference:
+                print("INFO: Did not find APEX, defaulting to fp32 training")
+
+        if self.Config.LR_SCHEDULE:
+            self.scheduler = lr_scheduler.ReduceLROnPlateau(self.optimizer,
+                                                            mode=self.Config.LR_SCHEDULE_MODE,
+                                                            patience=self.Config.LR_SCHEDULE_PATIENCE)
+
+        if self.Config.LOAD_WEIGHTS:
+            exp_utils.print_verbose(self.Config.VERBOSE, "Loading weights ... ({})".format(self.Config.WEIGHTS_PATH))
+            self.load_model(self.Config.WEIGHTS_PATH)
+
 
         ## Print model and number of parameters
         print(f"{self.net}")
@@ -129,36 +185,6 @@ class BaseModel:
                 print("After")
                 print_sparsity(layers)
 
-        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        net = self.net.to(self.device)
-
-        if self.Config.OPTIMIZER == "Adamax":
-            self.optimizer = Adamax(net.parameters(), lr=self.Config.LEARNING_RATE,
-                                    weight_decay=self.Config.WEIGHT_DECAY)
-        elif self.Config.OPTIMIZER == "Adam":
-            self.optimizer = Adam(net.parameters(), lr=self.Config.LEARNING_RATE,
-                                  weight_decay=self.Config.WEIGHT_DECAY)
-        else:
-            raise ValueError("Optimizer not defined")
-
-        if APEX_AVAILABLE and self.Config.FP16:
-            # Use O0 to disable fp16 (might be a little faster on TitanX)
-            self.net, self.optimizer = amp.initialize(self.net, self.optimizer, verbosity=0, opt_level="O1")
-            if not inference:
-                print("INFO: Using fp16 training")
-        else:
-            if not inference:
-                print("INFO: Did not find APEX, defaulting to fp32 training")
-
-        if self.Config.LR_SCHEDULE:
-            self.scheduler = lr_scheduler.ReduceLROnPlateau(self.optimizer,
-                                                            mode=self.Config.LR_SCHEDULE_MODE,
-                                                            patience=self.Config.LR_SCHEDULE_PATIENCE)
-
-        if self.Config.LOAD_WEIGHTS:
-            exp_utils.print_verbose(self.Config.VERBOSE, "Loading weights ... ({})".format(self.Config.WEIGHTS_PATH))
-            self.load_model(self.Config.WEIGHTS_PATH)
-
         # Reset weights of last layer for transfer learning
         # if self.Config.RESET_LAST_LAYER:
         #     self.net.conv_5 = nn.Conv2d(self.Config.UNET_NR_FILT, self.Config.NR_OF_CLASSES, kernel_size=1,
@@ -189,7 +215,7 @@ class BaseModel:
             else:
                 loss = nn.BCEWithLogitsLoss(weight=weights)(outputs, y)
         else:
-            if self.Config.LOSS_FUNCTION == "soft_sample_dice" or self.Config.LOSS_FUNCTION == "soft_batch_dice":
+            if self.Config.LOSS_FUNCTION == "soft_sample_dice" or self.Config.LOSS_FUNCTION == "soft_batch_dice" or self.Config.LOSS_FUNCTION == "boundary_dou":
                 loss = self.criterion(F.sigmoid(outputs), y)
                 # loss = criterion(F.sigmoid(outputs), y) + nn.BCEWithLogitsLoss()(outputs, y)  # combined loss
             else:
@@ -252,7 +278,7 @@ class BaseModel:
             else:
                 loss = nn.BCEWithLogitsLoss(weight=weights)(outputs, y)
         else:
-            if self.Config.LOSS_FUNCTION == "soft_sample_dice" or self.Config.LOSS_FUNCTION == "soft_batch_dice":
+            if self.Config.LOSS_FUNCTION == "soft_sample_dice" or self.Config.LOSS_FUNCTION == "soft_batch_dice" or self.Config.LOSS_FUNCTION == "boundary_dou":
                 loss = self.criterion(F.sigmoid(outputs), y)
                 # loss = criterion(F.sigmoid(outputs), y) + nn.BCEWithLogitsLoss()(outputs, y)
             else:
