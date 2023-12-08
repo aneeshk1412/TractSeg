@@ -34,7 +34,7 @@ def boundary_dou(outputs, labels):
     ## outputs: (bs, classes, x, y) [probabilities]
     ## labels: (bs, classes, x, y) [true labels, one-hot encoded]
 
-    kernel = torch.Tensor([[0, 1, 0], [1, 1, 1], [0, 1, 0]], dtype=outputs.dtype, requires_grad=False).to(device=outputs.device)
+    kernel = torch.tensor([[0, 1, 0], [1, 1, 1], [0, 1, 0]], dtype=outputs.dtype, device=outputs.device)
     kernel = kernel[None, None, :, :].repeat((outputs.shape[1], 1, 1, 1))
 
     C = F.conv2d(labels, kernel, padding=1, groups=outputs.shape[1])
@@ -47,8 +47,8 @@ def boundary_dou(outputs, labels):
     smooth = 1e-5
     alpha = 1 - 2.0 * (C + smooth) / (S + smooth)
 
-    intersect = torch.count_nonzero(outputs * labels, dim=(-1, -2))
-    union = torch.count_nonzero(outputs + labels, dim=(-1, -2))
+    intersect = torch.sum(outputs * labels, dim=(-1, -2))
+    union = torch.sum(outputs + labels, dim=(-1, -2))
     loss = (union - intersect + smooth) / (union - alpha * intersect + smooth)
     return loss.mean(dim=-1).sum()
 
@@ -144,7 +144,7 @@ class BaseModel:
         params_less_than_threshold = sum(torch.count_nonzero(torch.abs(p) < threshold) for p in self.net.parameters())
         print(f"Percent parameters less than {threshold}: {params_less_than_threshold / total_params * 100}%")
 
-        params_list = [abs(float(x)) for p in self.net.parameters() for x in p.detach().numpy().reshape(-1)]
+        params_list = [abs(float(x)) for p in self.net.parameters() for x in p.detach().cpu().numpy().reshape(-1)]
         counts, bins = np.histogram(params_list, bins=100)
         plt.stairs(counts, bins)
         plt.savefig(f"{Config.EXP_NAME}_weights_histogram.png")

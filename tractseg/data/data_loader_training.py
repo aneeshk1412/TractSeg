@@ -24,6 +24,7 @@ from batchgenerators.transforms.spatial_transforms import ZoomTransform
 from batchgenerators.transforms.spatial_transforms import MirrorTransform
 from batchgenerators.transforms.utility_transforms import NumpyToTensor
 from batchgenerators.transforms.abstract_transforms import Compose
+from batchgenerators.transforms.spatial_transforms import ResizeTransform
 from batchgenerators.dataloading.multi_threaded_augmenter import MultiThreadedAugmenter
 from batchgenerators.dataloading.data_loader import SlimDataLoaderBase
 from batchgenerators.augmentations.utils import pad_nd_image
@@ -408,6 +409,7 @@ class DataLoaderTraining:
                 if self.Config.DAUG_FLIP_PEAKS:
                     tfs.append(FlipVectorAxisTransform())
 
+        tfs.append(ResizeTransform(target_size=(192, 192)))
         tfs.append(NumpyToTensor(keys=["data", "seg"], cast_to="float"))
 
         #num_cached_per_queue 1 or 2 does not really make a difference

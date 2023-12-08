@@ -1,0 +1,32 @@
+WARNING: Ignoring invalid distribution -ractseg (/work/09355/aneeshks/ls6/TractSeg/.venv/lib/python3.9/site-packages)
+WARNING: Ignoring invalid distribution -ractseg (/work/09355/aneeshks/ls6/TractSeg/.venv/lib/python3.9/site-packages)
+Exception in thread Thread-2:
+Traceback (most recent call last):
+  File "/opt/apps/intel19/python3/3.9.7/lib/python3.9/threading.py", line 973, in _bootstrap_inner
+    self.run()
+  File "/opt/apps/intel19/python3/3.9.7/lib/python3.9/threading.py", line 910, in run
+    self._target(*self._args, **self._kwargs)
+  File "/work/09355/aneeshks/ls6/TractSeg/batchgenerators/batchgenerators/dataloading/multi_threaded_augmenter.py", line 92, in results_loop
+    raise RuntimeError("One or more background workers are no longer alive. Exiting. Please check the print"
+RuntimeError: One or more background workers are no longer alive. Exiting. Please check the print statements above for the actual error message
+Traceback (most recent call last):
+  File "/work/09355/aneeshks/ls6/TractSeg/.venv/bin/ExpRunner", line 201, in <module>
+    main()
+  File "/work/09355/aneeshks/ls6/TractSeg/.venv/bin/ExpRunner", line 136, in main
+    trainer.train_model(Config, model, data_loader)
+  File "/work/09355/aneeshks/ls6/TractSeg/.venv/lib/python3.9/site-packages/tractseg/libs/trainer.py", line 109, in train_model
+    batch = next(batch_gen_train) if type == "train" else next(batch_gen_val)
+  File "/work/09355/aneeshks/ls6/TractSeg/batchgenerators/batchgenerators/dataloading/multi_threaded_augmenter.py", line 204, in __next__
+    item = self.__get_next_item()
+  File "/work/09355/aneeshks/ls6/TractSeg/batchgenerators/batchgenerators/dataloading/multi_threaded_augmenter.py", line 189, in __get_next_item
+    raise RuntimeError("One or more background workers are no longer alive. Exiting. Please check the "
+RuntimeError: One or more background workers are no longer alive. Exiting. Please check the print statements above for the actual error message
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/opt/apps/intel19/python3/3.9.7/lib/python3.9/threading.py", line 973, in _bootstrap_inner
+    self.run()
+  File "/opt/apps/intel19/python3/3.9.7/lib/python3.9/threading.py", line 910, in run
+    self._target(*self._args, **self._kwargs)
+  File "/work/09355/aneeshks/ls6/TractSeg/batchgenerators/batchgenerators/dataloading/multi_threaded_augmenter.py", line 92, in results_loop
+    raise RuntimeError("One or more background workers are no longer alive. Exiting. Please check the print"
+RuntimeError: One or more background workers are no longer alive. Exiting. Please check the print statements above for the actual error message

@@ -1,0 +1,635 @@
+Processing /work/09355/aneeshks/ls6/TractSeg
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Requirement already satisfied: future in ./.venv/lib/python3.9/site-packages (from TractSeg==2.9) (0.18.3)
+Requirement already satisfied: numpy in ./.venv/lib/python3.9/site-packages (from TractSeg==2.9) (1.26.1)
+Requirement already satisfied: nibabel>=2.3.0 in ./.venv/lib/python3.9/site-packages (from TractSeg==2.9) (5.1.0)
+Requirement already satisfied: matplotlib in ./.venv/lib/python3.9/site-packages (from TractSeg==2.9) (3.8.1)
+Requirement already satisfied: scikit-learn in ./.venv/lib/python3.9/site-packages (from TractSeg==2.9) (1.3.2)
+Requirement already satisfied: scipy in ./.venv/lib/python3.9/site-packages (from TractSeg==2.9) (1.11.3)
+Requirement already satisfied: tqdm in ./.venv/lib/python3.9/site-packages (from TractSeg==2.9) (4.66.1)
+Requirement already satisfied: six in ./.venv/lib/python3.9/site-packages (from TractSeg==2.9) (1.16.0)
+Requirement already satisfied: psutil in ./.venv/lib/python3.9/site-packages (from TractSeg==2.9) (5.9.6)
+Requirement already satisfied: dipy>=1.5.0 in ./.venv/lib/python3.9/site-packages (from TractSeg==2.9) (1.7.0)
+Requirement already satisfied: fury in ./.venv/lib/python3.9/site-packages (from TractSeg==2.9) (0.9.0)
+Requirement already satisfied: joblib>=0.13.2 in ./.venv/lib/python3.9/site-packages (from TractSeg==2.9) (1.3.2)
+Requirement already satisfied: seaborn in ./.venv/lib/python3.9/site-packages (from TractSeg==2.9) (0.13.0)
+Requirement already satisfied: requests in ./.venv/lib/python3.9/site-packages (from TractSeg==2.9) (2.31.0)
+Requirement already satisfied: xvfbwrapper in ./.venv/lib/python3.9/site-packages (from TractSeg==2.9) (0.2.9)
+Requirement already satisfied: h5py>=2.8.0 in ./.venv/lib/python3.9/site-packages (from dipy>=1.5.0->TractSeg==2.9) (3.10.0)
+Requirement already satisfied: packaging>=17 in ./.venv/lib/python3.9/site-packages (from nibabel>=2.3.0->TractSeg==2.9) (23.2)
+Requirement already satisfied: aiohttp>=3.8.4 in ./.venv/lib/python3.9/site-packages (from fury->TractSeg==2.9) (3.8.6)
+Requirement already satisfied: pillow>=5.4.1 in ./.venv/lib/python3.9/site-packages (from fury->TractSeg==2.9) (10.0.1)
+Requirement already satisfied: pygltflib>=1.15.3 in ./.venv/lib/python3.9/site-packages (from fury->TractSeg==2.9) (1.16.1)
+Requirement already satisfied: vtk>=9.1.0 in ./.venv/lib/python3.9/site-packages (from fury->TractSeg==2.9) (9.2.6)
+Requirement already satisfied: contourpy>=1.0.1 in ./.venv/lib/python3.9/site-packages (from matplotlib->TractSeg==2.9) (1.2.0)
+Requirement already satisfied: cycler>=0.10 in ./.venv/lib/python3.9/site-packages (from matplotlib->TractSeg==2.9) (0.12.1)
+Requirement already satisfied: fonttools>=4.22.0 in ./.venv/lib/python3.9/site-packages (from matplotlib->TractSeg==2.9) (4.44.0)
+Requirement already satisfied: kiwisolver>=1.3.1 in ./.venv/lib/python3.9/site-packages (from matplotlib->TractSeg==2.9) (1.4.5)
+Requirement already satisfied: pyparsing>=2.3.1 in ./.venv/lib/python3.9/site-packages (from matplotlib->TractSeg==2.9) (3.1.1)
+Requirement already satisfied: python-dateutil>=2.7 in ./.venv/lib/python3.9/site-packages (from matplotlib->TractSeg==2.9) (2.8.2)
+Requirement already satisfied: importlib-resources>=3.2.0 in ./.venv/lib/python3.9/site-packages (from matplotlib->TractSeg==2.9) (6.1.0)
+Requirement already satisfied: charset-normalizer<4,>=2 in ./.venv/lib/python3.9/site-packages (from requests->TractSeg==2.9) (3.3.2)
+Requirement already satisfied: idna<4,>=2.5 in ./.venv/lib/python3.9/site-packages (from requests->TractSeg==2.9) (3.4)
+Requirement already satisfied: urllib3<3,>=1.21.1 in ./.venv/lib/python3.9/site-packages (from requests->TractSeg==2.9) (2.0.7)
+Requirement already satisfied: certifi>=2017.4.17 in ./.venv/lib/python3.9/site-packages (from requests->TractSeg==2.9) (2023.7.22)
+Requirement already satisfied: threadpoolctl>=2.0.0 in ./.venv/lib/python3.9/site-packages (from scikit-learn->TractSeg==2.9) (3.2.0)
+Requirement already satisfied: pandas>=1.2 in ./.venv/lib/python3.9/site-packages (from seaborn->TractSeg==2.9) (2.1.2)
+Requirement already satisfied: attrs>=17.3.0 in ./.venv/lib/python3.9/site-packages (from aiohttp>=3.8.4->fury->TractSeg==2.9) (23.1.0)
+Requirement already satisfied: multidict<7.0,>=4.5 in ./.venv/lib/python3.9/site-packages (from aiohttp>=3.8.4->fury->TractSeg==2.9) (6.0.4)
+Requirement already satisfied: async-timeout<5.0,>=4.0.0a3 in ./.venv/lib/python3.9/site-packages (from aiohttp>=3.8.4->fury->TractSeg==2.9) (4.0.3)
+Requirement already satisfied: yarl<2.0,>=1.0 in ./.venv/lib/python3.9/site-packages (from aiohttp>=3.8.4->fury->TractSeg==2.9) (1.9.2)
+Requirement already satisfied: frozenlist>=1.1.1 in ./.venv/lib/python3.9/site-packages (from aiohttp>=3.8.4->fury->TractSeg==2.9) (1.4.0)
+Requirement already satisfied: aiosignal>=1.1.2 in ./.venv/lib/python3.9/site-packages (from aiohttp>=3.8.4->fury->TractSeg==2.9) (1.3.1)
+Requirement already satisfied: zipp>=3.1.0 in ./.venv/lib/python3.9/site-packages (from importlib-resources>=3.2.0->matplotlib->TractSeg==2.9) (3.17.0)
+Requirement already satisfied: pytz>=2020.1 in ./.venv/lib/python3.9/site-packages (from pandas>=1.2->seaborn->TractSeg==2.9) (2023.3.post1)
+Requirement already satisfied: tzdata>=2022.1 in ./.venv/lib/python3.9/site-packages (from pandas>=1.2->seaborn->TractSeg==2.9) (2023.3)
+Requirement already satisfied: dataclasses-json>=0.0.25 in ./.venv/lib/python3.9/site-packages (from pygltflib>=1.15.3->fury->TractSeg==2.9) (0.6.1)
+Requirement already satisfied: deprecated in ./.venv/lib/python3.9/site-packages (from pygltflib>=1.15.3->fury->TractSeg==2.9) (1.2.14)
+Requirement already satisfied: marshmallow<4.0.0,>=3.18.0 in ./.venv/lib/python3.9/site-packages (from dataclasses-json>=0.0.25->pygltflib>=1.15.3->fury->TractSeg==2.9) (3.20.1)
+Requirement already satisfied: typing-inspect<1,>=0.4.0 in ./.venv/lib/python3.9/site-packages (from dataclasses-json>=0.0.25->pygltflib>=1.15.3->fury->TractSeg==2.9) (0.9.0)
+Requirement already satisfied: wrapt<2,>=1.10 in ./.venv/lib/python3.9/site-packages (from deprecated->pygltflib>=1.15.3->fury->TractSeg==2.9) (1.15.0)
+Requirement already satisfied: mypy-extensions>=0.3.0 in ./.venv/lib/python3.9/site-packages (from typing-inspect<1,>=0.4.0->dataclasses-json>=0.0.25->pygltflib>=1.15.3->fury->TractSeg==2.9) (1.0.0)
+Requirement already satisfied: typing-extensions>=3.7.4 in ./.venv/lib/python3.9/site-packages (from typing-inspect<1,>=0.4.0->dataclasses-json>=0.0.25->pygltflib>=1.15.3->fury->TractSeg==2.9) (4.8.0)
+Building wheels for collected packages: TractSeg
+  Building wheel for TractSeg (pyproject.toml): started
+  Building wheel for TractSeg (pyproject.toml): finished with status 'done'
+  Created wheel for TractSeg: filename=TractSeg-2.9-py3-none-any.whl size=4749850 sha256=768db59b0c4c34c69d20d7bd51236265773dc3d2f430459837d40f882e476099
+  Stored in directory: /tmp/pip-ephem-wheel-cache-42ocy_6r/wheels/c2/f0/54/b83bc170689d8cb524ab13cb144bd7c615e9dbb8708f2c72d0
+Successfully built TractSeg
+Installing collected packages: TractSeg
+  Attempting uninstall: TractSeg
+    Found existing installation: TractSeg 2.9
+    Uninstalling TractSeg-2.9:
+      Successfully uninstalled TractSeg-2.9
+Successfully installed TractSeg-2.9
+INFO: LABELS_FILENAME manually set
+Hyperparameters:
+{'BATCH_NORM': False,
+ 'BATCH_SIZE': 8,
+ 'BEST_EPOCH': 0,
+ 'BEST_EPOCH_SELECTION': 'f1',
+ 'CALC_F1': True,
+ 'CLASSES': 'camcan_all_classes',
+ 'CSD_RESOLUTION': 'LOW',
+ 'CV_FOLD': 0,
+ 'DATASET': 'camcan',
+ 'DATASET_FOLDER': '/scratch/09355/aneeshks/SegTracts/TrainingData/camcan/',
+ 'DATA_AUGMENTATION': True,
+ 'DAUG_ALPHA': (90.0, 120.0),
+ 'DAUG_BLUR_SIGMA': (0, 1),
+ 'DAUG_ELASTIC_DEFORM': True,
+ 'DAUG_FLIP_PEAKS': False,
+ 'DAUG_GAUSSIAN_BLUR': True,
+ 'DAUG_INFO': '-',
+ 'DAUG_MIRROR': False,
+ 'DAUG_NOISE': True,
+ 'DAUG_NOISE_VARIANCE': (0, 0.05),
+ 'DAUG_RESAMPLE': False,
+ 'DAUG_RESAMPLE_LEGACY': False,
+ 'DAUG_ROTATE': False,
+ 'DAUG_ROTATE_ANGLE': (-0.2, 0.2),
+ 'DAUG_SCALE': True,
+ 'DAUG_SIGMA': (9.0, 11.0),
+ 'DIM': '2D',
+ 'DROPOUT_SAMPLING': False,
+ 'EPOCH_MULTIPLIER': 1,
+ 'EXPERIMENT_TYPE': 'tract_segmentation',
+ 'EXP_MULTI_NAME': '',
+ 'EXP_NAME': 'my_custom_experiment',
+ 'EXP_PATH': '/scratch/09355/aneeshks/hcp_exp/my_custom_experiment_x8',
+ 'FEATURES_FILENAME': 'peaks/peaks',
+ 'FLIP_OUTPUT_PEAKS': False,
+ 'FP16': True,
+ 'GET_PROBS': False,
+ 'INFO': '-',
+ 'INPUT_DIM': (144, 144),
+ 'INPUT_RESCALING': False,
+ 'KEEP_INTERMEDIATE_FILES': False,
+ 'LABELS_FILENAME': 'tractmasks/masks/mask',
+ 'LABELS_FOLDER': 'bundle_masks',
+ 'LABELS_TYPE': 'int',
+ 'LEARNING_RATE': 0.001,
+ 'LOAD_WEIGHTS': False,
+ 'LOSS_FUNCTION': 'boundary_dou',
+ 'LOSS_WEIGHT': None,
+ 'LOSS_WEIGHT_LEN': -1,
+ 'LR_SCHEDULE': True,
+ 'LR_SCHEDULE_MODE': 'min',
+ 'LR_SCHEDULE_PATIENCE': 20,
+ 'METHOD': 'global_unstructured',
+ 'METRIC_TYPES': ['loss', 'f1_macro'],
+ 'MODEL': 'UNet_Pytorch_DeepSup',
+ 'MULTI_PARENT_PATH': '/scratch/09355/aneeshks/hcp_exp/',
+ 'NORMALIZE_DATA': True,
+ 'NORMALIZE_PER_CHANNEL': False,
+ 'NR_CPUS': -1,
+ 'NR_OF_CLASSES': 61,
+ 'NR_OF_GRADIENTS': 9,
+ 'NR_SLICES': 1,
+ 'NUM_EPOCHS': 150,
+ 'ONLY_VAL': False,
+ 'OPTIMIZER': 'Adamax',
+ 'OUTPUT_MULTIPLE_FILES': False,
+ 'PAD_TO_SQUARE': True,
+ 'PEAK_DICE_LEN_THR': 0.05,
+ 'PEAK_DICE_THR': [0.95],
+ 'PREDICT_IMG': False,
+ 'PREDICT_IMG_OUTPUT': None,
+ 'PRINT_FREQ': 20,
+ 'PRUNE': False,
+ 'P_SAMP': 1.0,
+ 'REMOVE_FRACTION': 0.2,
+ 'RESET_LAST_LAYER': False,
+ 'RESOLUTION': '1.25mm',
+ 'SAVE_WEIGHTS': True,
+ 'SEGMENT': False,
+ 'SEG_INPUT': 'Peaks',
+ 'SLICE_DIRECTION': 'y',
+ 'SPATIAL_TRANSFORM': 'SpatialTransformPeaks',
+ 'TEST': False,
+ 'TEST_TIME_DAUG': False,
+ 'THRESHOLD': 0.5,
+ 'TRACTSEG_DIR': 'tractseg_output',
+ 'TRAIN': True,
+ 'TRAINING_SLICE_DIRECTION': 'xyz',
+ 'TYPE': 'single_direction',
+ 'UNET_NR_FILT': 64,
+ 'UPSAMPLE_TYPE': 'bilinear',
+ 'USE_DROPOUT': False,
+ 'USE_VISLOGGER': False,
+ 'VERBOSE': True,
+ 'WEIGHTS_PATH': '',
+ 'WEIGHT_DECAY': 0}
+INFO: Did not find APEX, defaulting to fp32 training
+UNet_Pytorch_DeepSup(
+  (contr_1_1): Sequential(
+    (0): Conv2d(9, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): LeakyReLU(negative_slope=0.01, inplace=True)
+  )
+  (contr_1_2): Sequential(
+    (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): LeakyReLU(negative_slope=0.01, inplace=True)
+  )
+  (pool_1): MaxPool2d(kernel_size=(2, 2), stride=(2, 2), padding=0, dilation=1, ceil_mode=False)
+  (contr_2_1): Sequential(
+    (0): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): LeakyReLU(negative_slope=0.01, inplace=True)
+  )
+  (contr_2_2): Sequential(
+    (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): LeakyReLU(negative_slope=0.01, inplace=True)
+  )
+  (pool_2): MaxPool2d(kernel_size=(2, 2), stride=(2, 2), padding=0, dilation=1, ceil_mode=False)
+  (contr_3_1): Sequential(
+    (0): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): LeakyReLU(negative_slope=0.01, inplace=True)
+  )
+  (contr_3_2): Sequential(
+    (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): LeakyReLU(negative_slope=0.01, inplace=True)
+  )
+  (pool_3): MaxPool2d(kernel_size=(2, 2), stride=(2, 2), padding=0, dilation=1, ceil_mode=False)
+  (contr_4_1): Sequential(
+    (0): Conv2d(256, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): LeakyReLU(negative_slope=0.01, inplace=True)
+  )
+  (contr_4_2): Sequential(
+    (0): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): LeakyReLU(negative_slope=0.01, inplace=True)
+  )
+  (pool_4): MaxPool2d(kernel_size=(2, 2), stride=(2, 2), padding=0, dilation=1, ceil_mode=False)
+  (dropout): Dropout(p=0.4, inplace=False)
+  (encode_1): Sequential(
+    (0): Conv2d(512, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): LeakyReLU(negative_slope=0.01, inplace=True)
+  )
+  (encode_2): Sequential(
+    (0): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): LeakyReLU(negative_slope=0.01, inplace=True)
+  )
+  (deconv_1): Sequential(
+    (0): ConvTranspose2d(1024, 1024, kernel_size=(2, 2), stride=(2, 2))
+    (1): LeakyReLU(negative_slope=0.01, inplace=True)
+  )
+  (expand_1_1): Sequential(
+    (0): Conv2d(1536, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): LeakyReLU(negative_slope=0.01, inplace=True)
+  )
+  (expand_1_2): Sequential(
+    (0): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): LeakyReLU(negative_slope=0.01, inplace=True)
+  )
+  (deconv_2): Sequential(
+    (0): ConvTranspose2d(512, 512, kernel_size=(2, 2), stride=(2, 2))
+    (1): LeakyReLU(negative_slope=0.01, inplace=True)
+  )
+  (expand_2_1): Sequential(
+    (0): Conv2d(768, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): LeakyReLU(negative_slope=0.01, inplace=True)
+  )
+  (expand_2_2): Sequential(
+    (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): LeakyReLU(negative_slope=0.01, inplace=True)
+  )
+  (deconv_3): Sequential(
+    (0): ConvTranspose2d(256, 256, kernel_size=(2, 2), stride=(2, 2))
+    (1): LeakyReLU(negative_slope=0.01, inplace=True)
+  )
+  (output_2): Conv2d(768, 61, kernel_size=(1, 1), stride=(1, 1))
+  (output_2_up): Upsample(scale_factor=2.0, mode='bilinear')
+  (expand_3_1): Sequential(
+    (0): Conv2d(384, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): LeakyReLU(negative_slope=0.01, inplace=True)
+  )
+  (expand_3_2): Sequential(
+    (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): LeakyReLU(negative_slope=0.01, inplace=True)
+  )
+  (deconv_4): Sequential(
+    (0): ConvTranspose2d(128, 128, kernel_size=(2, 2), stride=(2, 2))
+    (1): LeakyReLU(negative_slope=0.01, inplace=True)
+  )
+  (output_3): Conv2d(384, 61, kernel_size=(1, 1), stride=(1, 1))
+  (output_3_up): Upsample(scale_factor=2.0, mode='bilinear')
+  (expand_4_1): Sequential(
+    (0): Conv2d(192, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): LeakyReLU(negative_slope=0.01, inplace=True)
+  )
+  (expand_4_2): Sequential(
+    (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): LeakyReLU(negative_slope=0.01, inplace=True)
+  )
+  (conv_5): Conv2d(64, 61, kernel_size=(1, 1), stride=(1, 1))
+)
+Number of parameters: 37029175
+Percent parameters less than 0.01: 78.2297592163086%
+Training...
+c317-001.ls6.tacc.utexas.edu
+Start looping batches...
+using pin_memory on device 0
+train Ep 0, Sp 160, loss 7.70256, t print 24.991s, t batch 1.25s
+train Ep 0, Sp 320, loss 7.480823, t print 11.979s, t batch 0.599s
+train Ep 0, Sp 480, loss 7.378119, t print 11.464s, t batch 0.573s
+train Ep 0, Sp 640, loss 7.442877, t print 21.142s, t batch 1.057s
+train Ep 0, Sp 800, loss 7.373917, t print 11.201s, t batch 0.56s
+train Ep 0, Sp 960, loss 7.336032, t print 12.143s, t batch 0.607s
+train Ep 0, Sp 1120, loss 7.335118, t print 20.31s, t batch 1.015s
+train Ep 0, Sp 1280, loss 7.178077, t print 11.226s, t batch 0.561s
+train Ep 0, Sp 1440, loss 7.167868, t print 11.447s, t batch 0.572s
+train Ep 0, Sp 1600, loss 6.988366, t print 21.189s, t batch 1.059s
+train Ep 0, Sp 1760, loss 7.108388, t print 11.441s, t batch 0.572s
+train Ep 0, Sp 1920, loss 6.993225, t print 11.186s, t batch 0.559s
+train Ep 0, Sp 2080, loss 7.017887, t print 20.841s, t batch 1.042s
+train Ep 0, Sp 2240, loss 7.018203, t print 11.382s, t batch 0.569s
+train Ep 0, Sp 2400, loss 7.0095, t print 11.4s, t batch 0.57s
+train Ep 0, Sp 2560, loss 6.873755, t print 20.906s, t batch 1.045s
+train Ep 0, Sp 2720, loss 6.935968, t print 11.162s, t batch 0.558s
+train Ep 0, Sp 2880, loss 6.930268, t print 11.512s, t batch 0.576s
+train Ep 0, Sp 3040, loss 6.850536, t print 20.997s, t batch 1.05s
+train Ep 0, Sp 3200, loss 6.905908, t print 11.365s, t batch 0.568s
+train Ep 0, Sp 3360, loss 6.859363, t print 11.56s, t batch 0.578s
+train Ep 0, Sp 3520, loss 7.017249, t print 21.322s, t batch 1.066s
+train Ep 0, Sp 3680, loss 6.774079, t print 11.559s, t batch 0.578s
+train Ep 0, Sp 3840, loss 6.85378, t print 11.398s, t batch 0.57s
+train Ep 0, Sp 4000, loss 6.870412, t print 20.559s, t batch 1.028s
+train Ep 0, Sp 4160, loss 6.868631, t print 12.292s, t batch 0.615s
+train Ep 0, Sp 4320, loss 6.845185, t print 11.516s, t batch 0.576s
+train Ep 0, Sp 4480, loss 6.773435, t print 18.617s, t batch 0.931s
+train Ep 0, Sp 4640, loss 6.661225, t print 14.505s, t batch 0.725s
+train Ep 0, Sp 4800, loss 6.842136, t print 11.436s, t batch 0.572s
+train Ep 0, Sp 4960, loss 6.714406, t print 15.741s, t batch 0.787s
+train Ep 0, Sp 5120, loss 6.724836, t print 17.28s, t batch 0.864s
+train Ep 0, Sp 5280, loss 6.628241, t print 11.653s, t batch 0.583s
+train Ep 0, Sp 5440, loss 6.670225, t print 12.391s, t batch 0.62s
+train Ep 0, Sp 5600, loss 6.742823, t print 20.319s, t batch 1.016s
+train Ep 0, Sp 5760, loss 6.533491, t print 11.79s, t batch 0.59s
+train Ep 0, Sp 5920, loss 6.806941, t print 11.521s, t batch 0.576s
+train Ep 0, Sp 6080, loss 6.514491, t print 21.6s, t batch 1.08s
+train Ep 0, Sp 6240, loss 6.627045, t print 11.723s, t batch 0.586s
+train Ep 0, Sp 6400, loss 6.478283, t print 11.835s, t batch 0.592s
+train Ep 0, Sp 6560, loss 6.818643, t print 21.563s, t batch 1.078s
+train Ep 0, Sp 6720, loss 6.699038, t print 11.459s, t batch 0.573s
+train Ep 0, Sp 6880, loss 6.482604, t print 11.494s, t batch 0.575s
+train Ep 0, Sp 7040, loss 6.541462, t print 20.998s, t batch 1.05s
+train Ep 0, Sp 7200, loss 6.666998, t print 11.706s, t batch 0.585s
+train Ep 0, Sp 7360, loss 6.51707, t print 11.732s, t batch 0.587s
+train Ep 0, Sp 7520, loss 6.583921, t print 21.332s, t batch 1.067s
+train Ep 0, Sp 7680, loss 6.330474, t print 11.756s, t batch 0.588s
+train Ep 0, Sp 7840, loss 6.534377, t print 11.711s, t batch 0.586s
+train Ep 0, Sp 8000, loss 6.608281, t print 21.138s, t batch 1.057s
+train Ep 0, Sp 8160, loss 6.414748, t print 12.172s, t batch 0.609s
+train Ep 0, Sp 8320, loss 6.433239, t print 11.578s, t batch 0.579s
+train Ep 0, Sp 8480, loss 6.642553, t print 18.826s, t batch 0.941s
+train Ep 0, Sp 8640, loss 6.475452, t print 14.519s, t batch 0.726s
+train Ep 0, Sp 8800, loss 6.640107, t print 11.44s, t batch 0.572s
+train Ep 0, Sp 8960, loss 6.538436, t print 15.601s, t batch 0.78s
+train Ep 0, Sp 9120, loss 6.3483, t print 17.043s, t batch 0.852s
+train Ep 0, Sp 9280, loss 6.546222, t print 11.641s, t batch 0.582s
+train Ep 0, Sp 9440, loss 6.472271, t print 12.92s, t batch 0.646s
+train Ep 0, Sp 9600, loss 6.487576, t print 20.285s, t batch 1.014s
+train Ep 0, Sp 9760, loss 6.426855, t print 11.719s, t batch 0.586s
+train Ep 0, Sp 9920, loss 6.283993, t print 11.511s, t batch 0.576s
+train Ep 0, Sp 10080, loss 6.584856, t print 21.956s, t batch 1.098s
+train Ep 0, Sp 10240, loss 6.5025, t print 11.719s, t batch 0.586s
+Start looping batches...
+using pin_memory on device 0
+validate Ep 0, Sp 160, loss 6.308024, t print 26.683s, t batch 1.334s
+validate Ep 0, Sp 320, loss 6.447717, t print 11.106s, t batch 0.555s
+validate Ep 0, Sp 480, loss 6.407667, t print 11.074s, t batch 0.554s
+validate Ep 0, Sp 640, loss 6.228793, t print 21.06s, t batch 1.053s
+validate Ep 0, Sp 800, loss 6.298623, t print 11.239s, t batch 0.562s
+validate Ep 0, Sp 960, loss 6.558974, t print 11.164s, t batch 0.558s
+validate Ep 0, Sp 1120, loss 6.286458, t print 21.124s, t batch 1.056s
+validate Ep 0, Sp 1280, loss 6.486532, t print 10.901s, t batch 0.545s
+validate Ep 0, Sp 1440, loss 6.237741, t print 11.008s, t batch 0.55s
+validate Ep 0, Sp 1600, loss 6.373911, t print 20.89s, t batch 1.045s
+validate Ep 0, Sp 1760, loss 6.589443, t print 10.924s, t batch 0.546s
+validate Ep 0, Sp 1920, loss 6.505395, t print 10.926s, t batch 0.546s
+validate Ep 0, Sp 2080, loss 6.477331, t print 20.751s, t batch 1.038s
+validate Ep 0, Sp 2240, loss 6.461311, t print 10.788s, t batch 0.539s
+validate Ep 0, Sp 2400, loss 6.349873, t print 10.73s, t batch 0.537s
+  Epoch 0, Average Epoch loss = 6.783333698172628
+  Epoch 0, nr_of_updates 1296
+current learning rate: 0.001
+  Saving weights...
+  Epoch 0, time total 1190.9029738903046s
+  Epoch 0, time UNet: 132.680358171463s
+  Epoch 0, time metrics: 0.1389143466949463s
+  Epoch 0, time saving files: 0.5601673126220703s
+2023-12-05 11:01:44.638308
+Start looping batches...
+train Ep 1, Sp 160, loss 6.396133, t print 1.571s, t batch 0.079s
+train Ep 1, Sp 320, loss 6.569577, t print 11.964s, t batch 0.598s
+train Ep 1, Sp 480, loss 6.199486, t print 12.386s, t batch 0.619s
+train Ep 1, Sp 640, loss 6.571661, t print 11.712s, t batch 0.586s
+train Ep 1, Sp 800, loss 6.555891, t print 21.494s, t batch 1.075s
+train Ep 1, Sp 960, loss 6.413718, t print 11.905s, t batch 0.595s
+train Ep 1, Sp 1120, loss 6.516365, t print 11.619s, t batch 0.581s
+train Ep 1, Sp 1280, loss 6.517726, t print 21.751s, t batch 1.088s
+train Ep 1, Sp 1440, loss 6.48546, t print 11.802s, t batch 0.59s
+train Ep 1, Sp 1600, loss 6.521591, t print 11.654s, t batch 0.583s
+train Ep 1, Sp 1760, loss 6.199257, t print 21.869s, t batch 1.093s
+train Ep 1, Sp 1920, loss 6.392467, t print 11.755s, t batch 0.588s
+train Ep 1, Sp 2080, loss 6.384871, t print 11.581s, t batch 0.579s
+train Ep 1, Sp 2240, loss 6.434693, t print 21.444s, t batch 1.072s
+train Ep 1, Sp 2400, loss 6.370202, t print 11.801s, t batch 0.59s
+train Ep 1, Sp 2560, loss 6.546105, t print 11.585s, t batch 0.579s
+train Ep 1, Sp 2720, loss 6.358408, t print 21.755s, t batch 1.088s
+train Ep 1, Sp 2880, loss 6.291587, t print 11.649s, t batch 0.582s
+train Ep 1, Sp 3040, loss 6.457128, t print 11.366s, t batch 0.568s
+train Ep 1, Sp 3200, loss 6.530966, t print 21.509s, t batch 1.075s
+train Ep 1, Sp 3360, loss 6.431532, t print 11.587s, t batch 0.579s
+train Ep 1, Sp 3520, loss 6.279829, t print 11.718s, t batch 0.586s
+train Ep 1, Sp 3680, loss 6.246018, t print 21.396s, t batch 1.07s
+train Ep 1, Sp 3840, loss 6.411798, t print 11.691s, t batch 0.585s
+train Ep 1, Sp 4000, loss 6.214497, t print 11.784s, t batch 0.589s
+train Ep 1, Sp 4160, loss 6.274265, t print 21.453s, t batch 1.073s
+train Ep 1, Sp 4320, loss 6.350796, t print 11.923s, t batch 0.596s
+train Ep 1, Sp 4480, loss 6.387132, t print 11.716s, t batch 0.586s
+train Ep 1, Sp 4640, loss 6.470088, t print 19.869s, t batch 0.993s
+train Ep 1, Sp 4800, loss 6.358571, t print 13.331s, t batch 0.667s
+train Ep 1, Sp 4960, loss 6.498987, t print 11.508s, t batch 0.575s
+train Ep 1, Sp 5120, loss 6.572351, t print 16.909s, t batch 0.845s
+train Ep 1, Sp 5280, loss 6.410518, t print 15.996s, t batch 0.8s
+train Ep 1, Sp 5440, loss 6.314042, t print 11.483s, t batch 0.574s
+train Ep 1, Sp 5600, loss 6.29788, t print 14.507s, t batch 0.725s
+train Ep 1, Sp 5760, loss 6.357145, t print 17.895s, t batch 0.895s
+train Ep 1, Sp 5920, loss 6.417752, t print 11.223s, t batch 0.561s
+train Ep 1, Sp 6080, loss 6.374473, t print 12.488s, t batch 0.624s
+train Ep 1, Sp 6240, loss 6.281625, t print 20.085s, t batch 1.004s
+train Ep 1, Sp 6400, loss 6.344882, t print 11.511s, t batch 0.576s
+train Ep 1, Sp 6560, loss 6.414871, t print 11.436s, t batch 0.572s
+train Ep 1, Sp 6720, loss 6.402519, t print 20.869s, t batch 1.043s
+train Ep 1, Sp 6880, loss 6.486289, t print 11.559s, t batch 0.578s
+train Ep 1, Sp 7040, loss 6.299059, t print 11.435s, t batch 0.572s
+train Ep 1, Sp 7200, loss 6.323527, t print 20.503s, t batch 1.025s
+train Ep 1, Sp 7360, loss 6.266405, t print 12.443s, t batch 0.622s
+train Ep 1, Sp 7520, loss 6.374257, t print 11.79s, t batch 0.589s
+train Ep 1, Sp 7680, loss 6.510453, t print 18.196s, t batch 0.91s
+train Ep 1, Sp 7840, loss 6.341941, t print 14.864s, t batch 0.743s
+train Ep 1, Sp 8000, loss 6.220913, t print 11.058s, t batch 0.553s
+train Ep 1, Sp 8160, loss 6.355192, t print 16.294s, t batch 0.815s
+train Ep 1, Sp 8320, loss 6.20293, t print 17.094s, t batch 0.855s
+train Ep 1, Sp 8480, loss 6.384992, t print 11.292s, t batch 0.565s
+train Ep 1, Sp 8640, loss 6.413629, t print 14.245s, t batch 0.712s
+train Ep 1, Sp 8800, loss 6.27191, t print 18.266s, t batch 0.913s
+train Ep 1, Sp 8960, loss 6.53843, t print 11.381s, t batch 0.569s
+train Ep 1, Sp 9120, loss 6.491082, t print 12.092s, t batch 0.605s
+train Ep 1, Sp 9280, loss 6.146881, t print 20.371s, t batch 1.019s
+train Ep 1, Sp 9440, loss 6.232505, t print 11.247s, t batch 0.562s
+train Ep 1, Sp 9600, loss 6.636115, t print 11.634s, t batch 0.582s
+train Ep 1, Sp 9760, loss 6.354704, t print 21.137s, t batch 1.057s
+train Ep 1, Sp 9920, loss 6.105693, t print 11.555s, t batch 0.578s
+train Ep 1, Sp 10080, loss 6.487523, t print 11.514s, t batch 0.576s
+train Ep 1, Sp 10240, loss 6.302351, t print 21.021s, t batch 1.051s
+Start looping batches...
+validate Ep 1, Sp 160, loss 6.322953, t print 0.967s, t batch 0.048s
+validate Ep 1, Sp 320, loss 6.375544, t print 12.541s, t batch 0.627s
+validate Ep 1, Sp 480, loss 6.313454, t print 11.96s, t batch 0.598s
+validate Ep 1, Sp 640, loss 6.374333, t print 10.903s, t batch 0.545s
+validate Ep 1, Sp 800, loss 6.263654, t print 19.115s, t batch 0.956s
+validate Ep 1, Sp 960, loss 6.440324, t print 12.398s, t batch 0.62s
+validate Ep 1, Sp 1120, loss 6.355885, t print 10.82s, t batch 0.541s
+validate Ep 1, Sp 1280, loss 6.345618, t print 18.469s, t batch 0.923s
+validate Ep 1, Sp 1440, loss 6.32697, t print 13.319s, t batch 0.666s
+validate Ep 1, Sp 1600, loss 6.446043, t print 11.038s, t batch 0.552s
+validate Ep 1, Sp 1760, loss 6.339659, t print 16.89s, t batch 0.845s
+validate Ep 1, Sp 1920, loss 6.108843, t print 14.687s, t batch 0.734s
+validate Ep 1, Sp 2080, loss 6.188385, t print 10.674s, t batch 0.534s
+validate Ep 1, Sp 2240, loss 6.364986, t print 15.254s, t batch 0.763s
+validate Ep 1, Sp 2400, loss 6.08057, t print 16.153s, t batch 0.808s
+  Epoch 1, Average Epoch loss = 6.381079856260323
+  Epoch 1, nr_of_updates 2592
+current learning rate: 0.001
+  Saving weights...
+  Epoch 1, time total 1134.9326598644257s
+  Epoch 1, time UNet: 122.68803596496582s
+  Epoch 1, time metrics: 0.14038777351379395s
+  Epoch 1, time saving files: 0.3100252151489258s
+2023-12-05 11:20:39.578994
+Start looping batches...
+train Ep 2, Sp 160, loss 6.326741, t print 1.661s, t batch 0.083s
+train Ep 2, Sp 320, loss 6.173905, t print 11.168s, t batch 0.558s
+train Ep 2, Sp 480, loss 6.528354, t print 12.734s, t batch 0.637s
+train Ep 2, Sp 640, loss 6.041047, t print 11.76s, t batch 0.588s
+train Ep 2, Sp 800, loss 6.30929, t print 20.571s, t batch 1.029s
+train Ep 2, Sp 960, loss 6.310587, t print 12.738s, t batch 0.637s
+train Ep 2, Sp 1120, loss 6.458163, t print 11.699s, t batch 0.585s
+train Ep 2, Sp 1280, loss 6.17828, t print 17.279s, t batch 0.864s
+train Ep 2, Sp 1440, loss 6.248008, t print 15.864s, t batch 0.793s
+train Ep 2, Sp 1600, loss 6.356349, t print 11.467s, t batch 0.573s
+train Ep 2, Sp 1760, loss 6.328204, t print 14.552s, t batch 0.728s
+train Ep 2, Sp 1920, loss 6.318085, t print 17.718s, t batch 0.886s
+train Ep 2, Sp 2080, loss 6.239152, t print 11.322s, t batch 0.566s
+train Ep 2, Sp 2240, loss 6.442064, t print 14.137s, t batch 0.707s
+train Ep 2, Sp 2400, loss 6.213517, t print 18.228s, t batch 0.911s
+train Ep 2, Sp 2560, loss 6.129492, t print 11.386s, t batch 0.569s
+train Ep 2, Sp 2720, loss 6.116271, t print 13.464s, t batch 0.673s
+train Ep 2, Sp 2880, loss 6.078561, t print 18.779s, t batch 0.939s
+train Ep 2, Sp 3040, loss 6.349589, t print 11.273s, t batch 0.564s
+train Ep 2, Sp 3200, loss 6.434662, t print 11.873s, t batch 0.594s
+train Ep 2, Sp 3360, loss 6.356612, t print 20.237s, t batch 1.012s
+train Ep 2, Sp 3520, loss 6.29806, t print 11.279s, t batch 0.564s
+train Ep 2, Sp 3680, loss 6.358392, t print 11.335s, t batch 0.567s
+train Ep 2, Sp 3840, loss 6.215934, t print 21.223s, t batch 1.061s
+train Ep 2, Sp 4000, loss 6.372738, t print 11.403s, t batch 0.57s
+train Ep 2, Sp 4160, loss 6.261489, t print 11.089s, t batch 0.554s
+train Ep 2, Sp 4320, loss 6.389981, t print 21.207s, t batch 1.06s
+train Ep 2, Sp 4480, loss 6.169994, t print 11.592s, t batch 0.58s
+train Ep 2, Sp 4640, loss 6.380427, t print 11.453s, t batch 0.573s
+train Ep 2, Sp 4800, loss 6.337066, t print 20.793s, t batch 1.04s
+train Ep 2, Sp 4960, loss 6.417011, t print 11.35s, t batch 0.567s
+train Ep 2, Sp 5120, loss 6.187241, t print 11.577s, t batch 0.579s
+train Ep 2, Sp 5280, loss 6.407657, t print 21.413s, t batch 1.071s
+train Ep 2, Sp 5440, loss 6.398673, t print 11.273s, t batch 0.564s
+train Ep 2, Sp 5600, loss 6.160818, t print 11.579s, t batch 0.579s
+train Ep 2, Sp 5760, loss 6.229201, t print 22.019s, t batch 1.101s
+train Ep 2, Sp 5920, loss 6.379752, t print 11.607s, t batch 0.58s
+train Ep 2, Sp 6080, loss 6.373379, t print 11.647s, t batch 0.582s
+train Ep 2, Sp 6240, loss 6.33963, t print 21.481s, t batch 1.074s
+train Ep 2, Sp 6400, loss 6.344261, t print 11.5s, t batch 0.575s
+train Ep 2, Sp 6560, loss 6.289821, t print 11.489s, t batch 0.574s
+train Ep 2, Sp 6720, loss 6.277256, t print 21.419s, t batch 1.071s
+train Ep 2, Sp 6880, loss 6.521971, t print 11.435s, t batch 0.572s
+train Ep 2, Sp 7040, loss 6.33177, t print 11.352s, t batch 0.568s
+train Ep 2, Sp 7200, loss 6.209173, t print 21.165s, t batch 1.058s
+train Ep 2, Sp 7360, loss 6.158363, t print 11.325s, t batch 0.566s
+train Ep 2, Sp 7520, loss 6.197695, t print 11.49s, t batch 0.574s
+train Ep 2, Sp 7680, loss 6.288672, t print 20.944s, t batch 1.047s
+train Ep 2, Sp 7840, loss 6.276629, t print 11.204s, t batch 0.56s
+train Ep 2, Sp 8000, loss 6.279907, t print 11.146s, t batch 0.557s
+train Ep 2, Sp 8160, loss 6.350957, t print 20.56s, t batch 1.028s
+train Ep 2, Sp 8320, loss 6.308752, t print 11.316s, t batch 0.566s
+train Ep 2, Sp 8480, loss 6.408921, t print 11.499s, t batch 0.575s
+train Ep 2, Sp 8640, loss 6.286846, t print 21.327s, t batch 1.066s
+train Ep 2, Sp 8800, loss 6.291175, t print 11.735s, t batch 0.587s
+train Ep 2, Sp 8960, loss 6.523833, t print 11.58s, t batch 0.579s
+train Ep 2, Sp 9120, loss 6.272771, t print 21.691s, t batch 1.085s
+train Ep 2, Sp 9280, loss 6.372379, t print 11.913s, t batch 0.596s
+train Ep 2, Sp 9440, loss 6.355385, t print 11.714s, t batch 0.586s
+train Ep 2, Sp 9600, loss 6.183949, t print 20.978s, t batch 1.049s
+train Ep 2, Sp 9760, loss 6.033936, t print 12.232s, t batch 0.612s
+train Ep 2, Sp 9920, loss 6.264299, t print 11.657s, t batch 0.583s
+train Ep 2, Sp 10080, loss 6.131195, t print 18.295s, t batch 0.915s
+train Ep 2, Sp 10240, loss 6.17421, t print 14.279s, t batch 0.714s
+Start looping batches...
+validate Ep 2, Sp 160, loss 6.287555, t print 0.96s, t batch 0.048s
+validate Ep 2, Sp 320, loss 6.297605, t print 12.683s, t batch 0.634s
+validate Ep 2, Sp 480, loss 6.286856, t print 11.858s, t batch 0.593s
+validate Ep 2, Sp 640, loss 6.181156, t print 10.945s, t batch 0.547s
+validate Ep 2, Sp 800, loss 6.265986, t print 21.133s, t batch 1.057s
+validate Ep 2, Sp 960, loss 6.297901, t print 11.616s, t batch 0.581s
+validate Ep 2, Sp 1120, loss 6.306414, t print 11.014s, t batch 0.551s
+validate Ep 2, Sp 1280, loss 6.206176, t print 20.968s, t batch 1.048s
+validate Ep 2, Sp 1440, loss 6.274251, t print 10.925s, t batch 0.546s
+validate Ep 2, Sp 1600, loss 6.408227, t print 11.041s, t batch 0.552s
+validate Ep 2, Sp 1760, loss 6.23306, t print 20.994s, t batch 1.05s
+validate Ep 2, Sp 1920, loss 6.282217, t print 11.054s, t batch 0.553s
+validate Ep 2, Sp 2080, loss 6.251466, t print 11.049s, t batch 0.552s
+validate Ep 2, Sp 2240, loss 6.348001, t print 20.628s, t batch 1.031s
+validate Ep 2, Sp 2400, loss 6.436667, t print 10.972s, t batch 0.549s
+  Epoch 2, Average Epoch loss = 6.291693322452498
+  Epoch 2, nr_of_updates 3888
+current learning rate: 0.001
+  Saving weights...
+  Epoch 2, time total 1130.4507608413696s
+  Epoch 2, time UNet: 122.77937746047974s
+  Epoch 2, time metrics: 0.14203834533691406s
+  Epoch 2, time saving files: 0.36074161529541016s
+2023-12-05 11:39:30.038584
+Start looping batches...
+train Ep 3, Sp 160, loss 6.327616, t print 1.61s, t batch 0.081s
+train Ep 3, Sp 320, loss 6.385019, t print 12.929s, t batch 0.646s
+train Ep 3, Sp 480, loss 6.121265, t print 12.558s, t batch 0.628s
+train Ep 3, Sp 640, loss 6.30896, t print 11.471s, t batch 0.574s
+train Ep 3, Sp 800, loss 6.283113, t print 21.488s, t batch 1.074s
+train Ep 3, Sp 960, loss 6.023542, t print 11.64s, t batch 0.582s
+train Ep 3, Sp 1120, loss 6.386068, t print 11.834s, t batch 0.592s
+train Ep 3, Sp 1280, loss 6.228241, t print 21.235s, t batch 1.062s
+train Ep 3, Sp 1440, loss 6.426316, t print 11.585s, t batch 0.579s
+train Ep 3, Sp 1600, loss 6.446412, t print 11.325s, t batch 0.566s
+train Ep 3, Sp 1760, loss 6.489958, t print 21.439s, t batch 1.072s
+train Ep 3, Sp 1920, loss 6.349348, t print 11.524s, t batch 0.576s
+train Ep 3, Sp 2080, loss 6.310801, t print 11.378s, t batch 0.569s
+train Ep 3, Sp 2240, loss 6.172777, t print 21.583s, t batch 1.079s
+train Ep 3, Sp 2400, loss 6.285705, t print 11.312s, t batch 0.566s
+train Ep 3, Sp 2560, loss 6.371212, t print 11.268s, t batch 0.563s
+train Ep 3, Sp 2720, loss 6.453987, t print 21.418s, t batch 1.071s
+train Ep 3, Sp 2880, loss 6.272484, t print 11.187s, t batch 0.559s
+train Ep 3, Sp 3040, loss 6.322908, t print 11.895s, t batch 0.595s
+train Ep 3, Sp 3200, loss 6.35702, t print 20.879s, t batch 1.044s
+train Ep 3, Sp 3360, loss 6.37218, t print 11.192s, t batch 0.56s
+train Ep 3, Sp 3520, loss 6.335934, t print 11.26s, t batch 0.563s
+train Ep 3, Sp 3680, loss 6.525509, t print 21.348s, t batch 1.067s
+train Ep 3, Sp 3840, loss 6.342758, t print 11.201s, t batch 0.56s
+train Ep 3, Sp 4000, loss 6.178967, t print 11.106s, t batch 0.555s
+train Ep 3, Sp 4160, loss 6.243773, t print 20.999s, t batch 1.05s
+train Ep 3, Sp 4320, loss 6.200049, t print 11.55s, t batch 0.578s
+train Ep 3, Sp 4480, loss 6.445861, t print 11.299s, t batch 0.565s
+train Ep 3, Sp 4640, loss 6.307702, t print 20.937s, t batch 1.047s
+train Ep 3, Sp 4800, loss 6.216656, t print 11.38s, t batch 0.569s
+train Ep 3, Sp 4960, loss 6.274907, t print 11.376s, t batch 0.569s
+train Ep 3, Sp 5120, loss 6.29966, t print 21.078s, t batch 1.054s
+train Ep 3, Sp 5280, loss 6.274373, t print 12.136s, t batch 0.607s
+train Ep 3, Sp 5440, loss 6.27431, t print 10.722s, t batch 0.536s
+train Ep 3, Sp 5600, loss 6.411871, t print 21.594s, t batch 1.08s
+train Ep 3, Sp 5760, loss 6.194461, t print 11.618s, t batch 0.581s
+train Ep 3, Sp 5920, loss 6.282047, t print 11.791s, t batch 0.59s
+train Ep 3, Sp 6080, loss 6.130445, t print 21.972s, t batch 1.099s
+train Ep 3, Sp 6240, loss 6.210107, t print 11.847s, t batch 0.592s
+train Ep 3, Sp 6400, loss 6.15692, t print 11.421s, t batch 0.571s
+train Ep 3, Sp 6560, loss 6.344971, t print 20.819s, t batch 1.041s
+train Ep 3, Sp 6720, loss 6.130625, t print 12.804s, t batch 0.64s
+train Ep 3, Sp 6880, loss 6.206916, t print 11.47s, t batch 0.574s
+train Ep 3, Sp 7040, loss 6.488121, t print 17.313s, t batch 0.866s
+train Ep 3, Sp 7200, loss 6.413191, t print 16.086s, t batch 0.804s
+train Ep 3, Sp 7360, loss 6.236193, t print 11.573s, t batch 0.579s
+train Ep 3, Sp 7520, loss 6.408512, t print 14.154s, t batch 0.708s
+train Ep 3, Sp 7680, loss 6.267982, t print 18.658s, t batch 0.933s
+train Ep 3, Sp 7840, loss 6.22779, t print 11.399s, t batch 0.57s
+train Ep 3, Sp 8000, loss 6.29958, t print 11.637s, t batch 0.582s
+train Ep 3, Sp 8160, loss 6.204664, t print 21.481s, t batch 1.074s
+train Ep 3, Sp 8320, loss 6.05778, t print 11.521s, t batch 0.576s
+train Ep 3, Sp 8480, loss 6.180769, t print 11.773s, t batch 0.589s
+train Ep 3, Sp 8640, loss 6.344634, t print 22.017s, t batch 1.101s
+train Ep 3, Sp 8800, loss 6.166363, t print 11.942s, t batch 0.597s
+train Ep 3, Sp 8960, loss 6.064413, t print 11.756s, t batch 0.588s
+train Ep 3, Sp 9120, loss 6.258612, t print 21.768s, t batch 1.088s
+train Ep 3, Sp 9280, loss 6.104625, t print 11.595s, t batch 0.58s
+train Ep 3, Sp 9440, loss 6.270382, t print 11.478s, t batch 0.574s
+train Ep 3, Sp 9600, loss 6.178832, t print 21.585s, t batch 1.079s
+train Ep 3, Sp 9760, loss 6.127432, t print 11.502s, t batch 0.575s
+train Ep 3, Sp 9920, loss 6.351248, t print 11.497s, t batch 0.575s
+train Ep 3, Sp 10080, loss 6.226295, t print 21.508s, t batch 1.075s
+train Ep 3, Sp 10240, loss 6.181356, t print 11.816s, t batch 0.591s
+Start looping batches...
+validate Ep 3, Sp 160, loss 6.326538, t print 0.988s, t batch 0.049s
+validate Ep 3, Sp 320, loss 6.180066, t print 34.094s, t batch 1.705s
+validate Ep 3, Sp 480, loss 6.37798, t print 5.758s, t batch 0.288s
+validate Ep 3, Sp 640, loss 6.409477, t print 11.036s, t batch 0.552s
+validate Ep 3, Sp 800, loss 6.223286, t print 21.012s, t batch 1.051s
+validate Ep 3, Sp 960, loss 6.10612, t print 10.896s, t batch 0.545s
+validate Ep 3, Sp 1120, loss 6.207957, t print 11.502s, t batch 0.575s
+validate Ep 3, Sp 1280, loss 6.27101, t print 21.106s, t batch 1.055s
+validate Ep 3, Sp 1440, loss 6.342894, t print 11.155s, t batch 0.558s
+validate Ep 3, Sp 1600, loss 6.190398, t print 11.102s, t batch 0.555s
+validate Ep 3, Sp 1760, loss 6.234725, t print 21.183s, t batch 1.059s
+validate Ep 3, Sp 1920, loss 6.436397, t print 11.47s, t batch 0.574s
+validate Ep 3, Sp 2080, loss 6.316923, t print 11.191s, t batch 0.56s
+validate Ep 3, Sp 2240, loss 6.266044, t print 20.888s, t batch 1.044s
+validate Ep 3, Sp 2400, loss 6.387559, t print 11.433s, t batch 0.572s
+  Epoch 3, Average Epoch loss = 6.2801543455800894
+  Epoch 3, nr_of_updates 5184
+current learning rate: 0.001
+  Saving weights...
+  Epoch 3, time total 1156.6000890731812s
+  Epoch 3, time UNet: 126.06029105186462s
+  Epoch 3, time metrics: 0.14740705490112305s
+  Epoch 3, time saving files: 0.7085862159729004s
+2023-12-05 11:58:46.647700
+Start looping batches...

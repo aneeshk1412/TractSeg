@@ -78,7 +78,7 @@ class SystemConfig:
     if "working_dir" in paths:  # check if config file
         HOME = paths["working_dir"]
     else:  # fallback
-        HOME = join(expanduser("~/TractSeg"))
+        HOME = os.environ["SCRATCH"]
 
     if "network_dir" in paths:
         NETWORK_DRIVE = paths["network_dir"]
@@ -97,7 +97,7 @@ class SystemConfig:
     else:
         DATA_PATH = HOME
 
-    if NETWORK_DRIVE is not None:
+    if NETWORK_DRIVE is not "":
         EXP_PATH = join(NETWORK_DRIVE, "hcp_exp_nodes")
     else:
         EXP_PATH = join(HOME, "hcp_exp")
